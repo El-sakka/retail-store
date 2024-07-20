@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  postgresqldb:
+    image: postgres
+    environment:
+      POSTGRES_DB: storeDb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "8001:5432"
+
+  app:
+    build: ./
+    image: store-app
+    container_name: store-app
+    depends_on:
+      - postgresqldb
+    ports:
+      - "8080:8080"
